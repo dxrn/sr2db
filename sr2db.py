@@ -4,11 +4,11 @@ from qb import *
 def main(args):
 
     if args.d != None:
-        DATABASE_NAME = args.c[0]
-        YEAR = args.c[1]
+        DATABASE_NAME = args.d[0]
+        YEAR = args.d[1]
         create_db(format_data(YEAR), DATABASE_NAME)
     elif args.c != None:
-        DATABASE_NAME = args.d[0]
+        DATABASE_NAME = args.c[0]
         monthly_demand(DATABASE_NAME)
     else:
         print("No arguments passed") 
