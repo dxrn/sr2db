@@ -21,20 +21,20 @@ This will create a formatted csv of all historical demand per month by child ASI
 ## File Format
 Unfortunately, AZ reports will need to be exported with the following categories in this order, this can be changed via the Show/Hide Columns sidebar:
 
-Parent Asin
-Child Asin
-Title
-SKU
-Sessions - Total
-Sessions Percentage - Total
-Page Views - Total
-Page Views Percentage - Total
-Featured Offer (Buy  Box) Percentage
-Units Ordered
-Units Ordered - B2B
-Ordered Product Sales
-Ordered Product Sales - B2B
-Total Order Items
-Total Order Items - B2B
+Parent Asin  
+Child Asin  
+Title  
+SKU  
+Sessions - Total  
+Sessions Percentage - Total  
+Page Views - Total  
+Page Views Percentage - Total  
+Featured Offer (Buy  Box) Percentage  
+Units Ordered  
+Units Ordered - B2B  
+Ordered Product Sales  
+Ordered Product Sales - B2B  
+Total Order Items  
+Total Order Items - B2B  
 
 [Image](https://i.imgur.com/lNPMdnt.png)
