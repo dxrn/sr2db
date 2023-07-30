@@ -32,9 +32,9 @@ Page Views Percentage - Total
 Featured Offer (Buy  Box) Percentage  
 Units Ordered  
 Units Ordered - B2B  
-Ordered Product Sales  
-Ordered Product Sales - B2B  
 Unit Session Percentage  
 Unit Session Percentage - B2B  
+Ordered Product Sales  
+Ordered Product Sales - B2B  
 Total Order Items  
 Total Order Items - B2B  
