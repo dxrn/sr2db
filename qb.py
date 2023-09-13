@@ -6,61 +6,68 @@ import json
 
 def create_db(array, DATABASE_NAME):
     if os.path.exists(f"database/{DATABASE_NAME}.db") == True:
-        print("Found database file with same name")
-        os.remove(f"database/{DATABASE_NAME}.db")
-        print(f"Overwrote database: {DATABASE_NAME}.db")
-    conn = sqlite3.connect(f"database/{DATABASE_NAME}.db")
-    print(f"Created database: {DATABASE_NAME}.db")
-    cursor = conn.cursor()
-    
-    cursor.execute("""CREATE TABLE main 
-    (   
-        date TEXT,
-        parent_asin TEXT, 
-        child_asin TEXT, 
-        title TEXT,
-        sku TEXT,
-        sessions INTEGER,
-        session_perc REAL,
-        page_views INTEGER,
-        page_views_perc REAL,
-        buy_box_perc REAL,
-        units_ordered INTEGER,
-        units_ordered_b2b INTEGER,
-        unit_session_perc REAL,
-        unit_session_perc_b2b REAL,
-        ordered_product_sales REAL,
-        ordered_product_sales_b2b REAL,
-        total_order_items INTEGER,
-        total_order_items_b2b INTEGER
-    )   
-    """)
+        ans = input("Found database file with same name. Overwrite, [y/n]? \n")
 
-    cursor.executemany("""INSERT INTO main     
-    (   
-        date,
-        parent_asin, 
-        child_asin, 
-        title,
-        sku,
-        sessions,
-        session_perc,
-        page_views,
-        page_views_perc,
-        buy_box_perc,
-        units_ordered,
-        units_ordered_b2b,
-        unit_session_perc,
-        unit_session_perc_b2b,
-        ordered_product_sales,
-        ordered_product_sales_b2b,
-        total_order_items,
-        total_order_items_b2b
-    )   
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);""", array)
-    conn.commit()
-    cursor.close()
-    
+        if ans.lower() == "y":
+
+            os.remove(f"database/{DATABASE_NAME}.db")
+            print(f"Overwrote database: {DATABASE_NAME}.db")
+            conn = sqlite3.connect(f"database/{DATABASE_NAME}.db")
+            print(f"Created database: {DATABASE_NAME}.db")
+            cursor = conn.cursor()
+            
+            cursor.execute("""CREATE TABLE main 
+            (   
+                date TEXT,
+                parent_asin TEXT, 
+                child_asin TEXT, 
+                title TEXT,
+                sku TEXT,
+                sessions INTEGER,
+                session_perc REAL,
+                page_views INTEGER,
+                page_views_perc REAL,
+                buy_box_perc REAL,
+                units_ordered INTEGER,
+                units_ordered_b2b INTEGER,
+                unit_session_perc REAL,
+                unit_session_perc_b2b REAL,
+                ordered_product_sales REAL,
+                ordered_product_sales_b2b REAL,
+                total_order_items INTEGER,
+                total_order_items_b2b INTEGER
+            )   
+            """)
+
+            cursor.executemany("""INSERT INTO main     
+            (   
+                date,
+                parent_asin, 
+                child_asin, 
+                title,
+                sku,
+                sessions,
+                session_perc,
+                page_views,
+                page_views_perc,
+                buy_box_perc,
+                units_ordered,
+                units_ordered_b2b,
+                unit_session_perc,
+                unit_session_perc_b2b,
+                ordered_product_sales,
+                ordered_product_sales_b2b,
+                total_order_items,
+                total_order_items_b2b
+            )   
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);""", array)
+            conn.commit()
+            cursor.close()
+
+        else:
+            quit()
+
+# Cleans AZ data, by stripping $,%,,    
 def format_data(YEAR):
     paths_file = open("paths.json")
     paths = json.load(paths_file)
@@ -92,7 +99,7 @@ def format_data(YEAR):
 
     return data
 
-
+# Generate sql query
 def build_query(category,year):
     query = "SELECT parent_asin,child_asin, title, sku,"
     for x in range(1,13): 
