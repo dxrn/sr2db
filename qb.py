@@ -5,13 +5,7 @@ import sqlite3
 import json
 
 def create_db(array, DATABASE_NAME):
-    if os.path.exists(f"database/{DATABASE_NAME}.db") == True:
-        ans = input("Found database file with same name. Overwrite, [y/n]? \n")
-
-        if ans.lower() == "y":
-
-            os.remove(f"database/{DATABASE_NAME}.db")
-            print(f"Overwrote database: {DATABASE_NAME}.db")
+    def db_init(DATABASE_NAME):
             conn = sqlite3.connect(f"database/{DATABASE_NAME}.db")
             print(f"Created database: {DATABASE_NAME}.db")
             cursor = conn.cursor()
@@ -64,8 +58,16 @@ def create_db(array, DATABASE_NAME):
             conn.commit()
             cursor.close()
 
+    if os.path.exists(f"database/{DATABASE_NAME}.db") == True:
+        ans = input("Found database file with same name. Overwrite, [y/n]? \n")
+
+        if ans.lower() == "y":
+            os.remove(f"database/{DATABASE_NAME}.db")
+            db_init(DATABASE_NAME)
         else:
             quit()
+    else:
+        db_init(DATABASE_NAME)      
 
 # Cleans AZ data, by stripping $,%,,    
 def format_data(YEAR):
@@ -141,3 +143,4 @@ def monthly_demand(DATABASE_NAME):
 # TODO: Display stats
 def stats(DATABASE_NAME):
     pass
+
